@@ -77,7 +77,7 @@ final class UserDetailsViewController: UIViewController {
     }
 
     private func setupUsernameLabel() {
-        usernameLabel.text = viewModel.user.username
+        usernameLabel.text = viewModel.username
         usernameLabel.font = .boldSystemFont(ofSize: 24.0)
         usernameLabel.textAlignment = .center
 
@@ -85,7 +85,7 @@ final class UserDetailsViewController: UIViewController {
     }
 
     private func setupLinkButton() {
-        linkButton.setTitle(viewModel.user.gitHubURL.absoluteString, for: .normal)
+        linkButton.setTitle(viewModel.gitHubLink, for: .normal)
         linkButton.setTitleColor(.blue, for: .normal)
         linkButton.titleLabel?.textAlignment = .center
         linkButton.titleLabel?.numberOfLines = 0

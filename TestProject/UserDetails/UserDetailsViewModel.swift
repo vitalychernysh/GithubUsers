@@ -12,7 +12,12 @@ import Kingfisher
 
 final class UserDetailsViewModel {
 
-    var user: User { model.user }
+    var username: String {
+        model.user.username
+    }
+    var gitHubLink: String {
+        model.user.gitHubURL.absoluteString
+    }
 
     private let model: UserDetailsModel
     
@@ -22,7 +27,7 @@ final class UserDetailsViewModel {
 
     func loadUserAvatar(completion: @escaping (UIImage?) -> Void) {
         KingfisherManager.shared.retrieveImage(
-            with: user.avatarURL,
+            with: model.user.avatarURL,
             options: nil,
             progressBlock: nil
         ) { result in
