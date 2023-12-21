@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		242DB8F62B343C2900B4C39B /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 242DB8F52B343C2900B4C39B /* Logger.swift */; };
 		2465170C2B020D6A0019045B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2465170B2B020D6A0019045B /* AppDelegate.swift */; };
 		2465170E2B020D6A0019045B /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2465170D2B020D6A0019045B /* SceneDelegate.swift */; };
 		246517152B020D6B0019045B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 246517142B020D6B0019045B /* Assets.xcassets */; };
@@ -55,6 +56,7 @@
 
 /* Begin PBXFileReference section */
 		17C1D306A5462F8C4CF7F820 /* Pods_TestProject.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TestProject.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		242DB8F52B343C2900B4C39B /* Logger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
 		246517082B020D6A0019045B /* TestProject.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TestProject.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2465170B2B020D6A0019045B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		2465170D2B020D6A0019045B /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -161,6 +163,7 @@
 				2465172D2B0212D50019045B /* Core.h */,
 				246517372B0212E00019045B /* User.swift */,
 				246517392B02138D0019045B /* NetworkClient.swift */,
+				242DB8F52B343C2900B4C39B /* Logger.swift */,
 				2465173B2B0214C10019045B /* UsersRepository.swift */,
 			);
 			path = Core;
@@ -370,6 +373,7 @@
 				246517382B0212E00019045B /* User.swift in Sources */,
 				2465173C2B0214C10019045B /* UsersRepository.swift in Sources */,
 				2465173A2B02138D0019045B /* NetworkClient.swift in Sources */,
+				242DB8F62B343C2900B4C39B /* Logger.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

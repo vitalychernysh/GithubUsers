@@ -51,4 +51,12 @@ final class UsersListModel {
         delegate?.usersList(self, didRequestUserDetails: usersSubject.value[index])
     }
 
+    func printStorage() {
+        usersRepository.printStoredUsers()
+    }
+
+    func clearStorage() {
+        usersRepository.clearStorage()
+    }
+
 }

@@ -37,5 +37,13 @@ final class UsersListViewModel {
     func handleRowSelection(at indexPath: IndexPath) {
         model.openDetailsForUser(at: indexPath.row)
     }
-    
+
+    func printStorage() {
+        model.printStorage()
+    }
+
+    func clearStorage() {
+        model.clearStorage()
+    }
+
 }

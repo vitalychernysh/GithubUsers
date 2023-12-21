@@ -17,6 +17,7 @@ final class UsersListViewController: UIViewController {
     private let viewModel: UsersListViewModel
     private let tableView = UITableView()
     private let cellReuseIdentifier = String(describing: UsersListTableViewCell.self)
+    private let refreshControl: UIRefreshControl = .init()
 
     private var disposeBag: Set<AnyCancellable> = .init()
     private var userRows: [UserRow] = []
@@ -36,27 +37,45 @@ final class UsersListViewController: UIViewController {
 
         view.backgroundColor = .white
 
+        setupNavigationItem()
         setupTableView()
+        setupRefreshControl()
         setupBindings()
 
         viewModel.fetchUsers()
     }
 
     private func setupBindings() {
-        viewModel.userRowsPublisher.sink { [weak self] completion in
-            switch completion {
-            case .finished:
-                break
+        viewModel.userRowsPublisher.sink(receiveCompletion: { [weak self] completion in
+            guard let self, case .failure(let error) = completion else { return }
 
-            case .failure(let error):
-                self?.handleError(error)
-            }
-        } receiveValue: { [weak self] userRows in
+            self.refreshControl.endRefreshing()
+            self.handleError(error)
+        }, receiveValue: { [weak self] userRows in
             guard let self else { return }
 
             self.userRows = userRows
             self.tableView.reloadData()
-        }.store(in: &disposeBag)
+            self.refreshControl.endRefreshing()
+        }).store(in: &disposeBag)
+    }
+
+    private func setupNavigationItem() {
+        let clearStorageItem = UIBarButtonItem(
+            title: NSLocalizedString("Clear storage", comment: ""),
+            style: .plain,
+            target: self,
+            action: #selector(handleClearStorageButtonAction(_:))
+        )
+        let printStorageItem = UIBarButtonItem(
+            title: NSLocalizedString("Print storage", comment: ""),
+            style: .plain,
+            target: self,
+            action: #selector(handlePrintStorageButtonAction(_:))
+        )
+
+        navigationItem.leftBarButtonItem = clearStorageItem
+        navigationItem.rightBarButtonItem = printStorageItem
     }
 
     private func setupTableView() {
@@ -70,12 +89,34 @@ final class UsersListViewController: UIViewController {
         }
     }
 
+    private func setupRefreshControl() {
+        refreshControl.attributedTitle = NSAttributedString(string: "Pull to refresh")
+        refreshControl.addTarget(self, action: #selector(self.refreshData(_:)), for: .valueChanged)
+
+        tableView.addSubview(refreshControl)
+    }
+
     private func handleError(_ error: Error) {
         let alertController = UIAlertController(title: nil, message: error.localizedDescription, preferredStyle: .alert)
         let cancelAction = UIAlertAction(title: NSLocalizedString("Cancel", comment: ""), style: .cancel)
 
         alertController.addAction(cancelAction)
         present(alertController, animated: true)
+    }
+
+    @objc
+    private func handlePrintStorageButtonAction(_ sender: UIBarButtonItem) {
+        viewModel.printStorage()
+    }
+    
+    @objc
+    private func handleClearStorageButtonAction(_ sender: UIBarButtonItem) {
+        viewModel.clearStorage()
+    }
+
+    @objc
+    private func refreshData(_ sender: UIRefreshControl) {
+        viewModel.fetchUsers()
     }
 
 }

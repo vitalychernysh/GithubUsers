@@ -5,7 +5,7 @@
 //  Created by Vitalii Chernysh on 13.11.2023.
 //
 
-public final class User: Decodable {
+public final class User: Codable {
 
     public let id: Int
     public let username: String
