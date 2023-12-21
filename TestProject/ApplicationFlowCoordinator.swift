@@ -15,6 +15,8 @@ final class ApplicationFlowCoordinator {
     
     init(window: UIWindow) {
         self.window = window
+
+        printLogsIntro()
     }
 
     func execute() {
@@ -22,6 +24,14 @@ final class ApplicationFlowCoordinator {
         window.makeKeyAndVisible()
 
         navigationController.viewControllers = [buildUsersListViewController()]
+    }
+    
+    private func printLogsIntro() {
+        let logsFirstPart = "Logs TXT file path:\n"
+        let logsAbsolutePath = LogType.common.filePathURL?.absoluteString ?? ""
+        let logsLastPart = "\nCopy the path above, press CMD+SHIFT+G in Finder and paste it there."
+
+        print(logsFirstPart + logsAbsolutePath + logsLastPart)
     }
 
     private func buildUsersListViewController() -> UIViewController {
